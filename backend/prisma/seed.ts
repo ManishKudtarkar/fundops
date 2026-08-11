@@ -19,50 +19,83 @@ const prisma = new PrismaClient({
 
 async function main() {
   const password = await bcrypt.hash("Password@123", 10);
+  const DEFAULT_BUSINESS_ID = "00000000-0000-0000-0000-000000000001";
 
-  const users = [
+  // Create or get default business
+  const business = await prisma.business.upsert({
+    where: { id: DEFAULT_BUSINESS_ID },
+    update: {},
+    create: {
+      id: DEFAULT_BUSINESS_ID,
+      name: "ABC Traders",
+      status: "ACTIVE",
+    },
+  });
+
+  // Create SUPER_ADMIN
+  await prisma.user.upsert({
+    where: { email: "demo.admin@fundops.local" },
+    update: {
+      password,
+      name: "Demo Administrator",
+      role: "SUPER_ADMIN",
+      businessId: null, // SUPER_ADMIN has no businessId
+    },
+    create: {
+      name: "Demo Administrator",
+      email: "demo.admin@fundops.local",
+      password,
+      role: "SUPER_ADMIN",
+      businessId: null,
+      isActive: true,
+    },
+  });
+
+  // Create business users
+  const businessUsers = [
     {
-      name: "System Administrator",
-      email: "admin@fundops.com",
-      role: "ADMIN" as const,
+      name: "ABC Business Admin",
+      email: "abc.admin@fundops.local",
+      role: "BUSINESS_ADMIN" as const,
     },
     {
-      name: "Sales User",
-      email: "sales@fundops.com",
+      name: "Sales Team",
+      email: "sales@abc.local",
       role: "SALES" as const,
     },
     {
-      name: "Warehouse User",
-      email: "warehouse@fundops.com",
+      name: "Warehouse Team",
+      email: "warehouse@abc.local",
       role: "WAREHOUSE" as const,
     },
     {
-      name: "Accounts User",
-      email: "accounts@fundops.com",
+      name: "Accounts Team",
+      email: "accounts@abc.local",
       role: "ACCOUNTS" as const,
     },
   ];
 
-  for (const user of users) {
+  for (const user of businessUsers) {
     await prisma.user.upsert({
-      where: {
-        email: user.email,
-      },
+      where: { email: user.email },
       update: {
         password,
         name: user.name,
         role: user.role,
+        businessId: DEFAULT_BUSINESS_ID,
       },
       create: {
         name: user.name,
         email: user.email,
         password,
         role: user.role,
+        businessId: DEFAULT_BUSINESS_ID,
+        isActive: true,
       },
     });
   }
 
-  console.log("Seed users created successfully.");
+  console.log("Seed users and business created successfully.");
 }
 
 main()

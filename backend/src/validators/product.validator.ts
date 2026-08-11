@@ -35,7 +35,7 @@ export const stockMovementSchema = z.object({
     .int()
     .positive("Quantity must be greater than zero"),
 
-  movementType: z.enum(["IN", "OUT"]),
+  movementType: z.enum(["IN", "OUT", "ADJUSTMENT"]),
 
   reason: z.string().min(2, "Reason is required"),
 });

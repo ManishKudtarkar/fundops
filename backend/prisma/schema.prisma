@@ -6,11 +6,20 @@ datasource db {
   provider = "postgresql"
 }
 
+// ─── Enums ─────────────────────────────────────────────────────────────────
+
 enum Role {
-  ADMIN
+  SUPER_ADMIN
+  BUSINESS_ADMIN
   SALES
   WAREHOUSE
   ACCOUNTS
+}
+
+enum BusinessStatus {
+  ACTIVE
+  SUSPENDED
+  INACTIVE
 }
 
 enum CustomerType {
@@ -28,6 +37,13 @@ enum CustomerStatus {
 enum StockMovementType {
   IN
   OUT
+  ADJUSTMENT
+}
+
+enum ReferenceType {
+  SALES_CHALLAN
+  MANUAL
+  ADJUSTMENT
 }
 
 enum ChallanStatus {
@@ -36,22 +52,93 @@ enum ChallanStatus {
   CANCELLED
 }
 
-model User {
-  id            String          @id @default(uuid())
-  name          String
-  email         String          @unique
-  password      String
-  role          Role
-  createdAt     DateTime        @default(now())
-  updatedAt     DateTime        @updatedAt
-
-  customers     Customer[]
-  stockMovements StockMovement[]
-  challans      Challan[]
+enum AuditAction {
+  LOGIN
+  LOGOUT
+  CREATE_CUSTOMER
+  UPDATE_CUSTOMER
+  DELETE_CUSTOMER
+  CREATE_PRODUCT
+  UPDATE_PRODUCT
+  DELETE_PRODUCT
+  STOCK_IN
+  STOCK_OUT
+  STOCK_ADJUSTMENT
+  CREATE_CHALLAN
+  CONFIRM_CHALLAN
+  CANCEL_CHALLAN
+  DELETE_CHALLAN
+  CREATE_USER
+  UPDATE_USER
+  ROLE_CHANGE
+  BUSINESS_CREATED
+  BUSINESS_SUSPENDED
+  BUSINESS_ACTIVATED
 }
+
+// ─── Business / Organisation ────────────────────────────────────────────────
+
+model Business {
+  id          String         @id @default(uuid())
+  name        String
+  legalName   String?
+  email       String?
+  phone       String?
+  address     String?
+  city        String?
+  state       String?
+  country     String?
+  postalCode  String?
+  gstin       String?
+  logoUrl     String?
+  status      BusinessStatus @default(ACTIVE)
+  // Business-level settings (JSON blob for flexibility)
+  settings    Json?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  users          User[]
+  customers      Customer[]
+  products       Product[]
+  challans       Challan[]
+  stockMovements StockMovement[]
+  followUps      FollowUp[]
+  auditLogs      AuditLog[]
+
+  @@index([status])
+}
+
+// ─── User ───────────────────────────────────────────────────────────────────
+
+model User {
+  id          String    @id @default(uuid())
+  businessId  String?   // null for SUPER_ADMIN
+  name        String
+  email       String    @unique
+  password    String
+  role        Role
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  business              Business?       @relation(fields: [businessId], references: [id])
+  customers             Customer[]
+  stockMovements        StockMovement[]
+  challans              Challan[]
+  followUpsCreated      FollowUp[]      @relation("FollowUpCreated")
+  followUpsAssigned     FollowUp[]      @relation("FollowUpAssigned")
+  auditLogs             AuditLog[]
+
+  @@index([businessId])
+  @@index([role])
+  @@index([email])
+}
+
+// ─── Customer ───────────────────────────────────────────────────────────────
 
 model Customer {
   id            String         @id @default(uuid())
+  businessId    String
   name          String
   mobile        String
   email         String?
@@ -67,14 +154,26 @@ model Customer {
 
   createdById   String
   createdBy     User           @relation(fields: [createdById], references: [id])
+  business      Business       @relation(fields: [businessId], references: [id])
 
   challans      Challan[]
+  followUps     FollowUp[]
+
+  @@index([businessId])
+  @@index([businessId, status])
+  @@index([businessId, createdAt])
+  @@index([status])
+  @@index([followUpDate])
+  @@index([createdAt])
 }
+
+// ─── Product ────────────────────────────────────────────────────────────────
 
 model Product {
   id                String          @id @default(uuid())
+  businessId        String
   name              String
-  sku               String          @unique
+  sku               String
   category          String
   unitPrice         Decimal         @db.Decimal(12, 2)
   currentStock      Int             @default(0)
@@ -83,25 +182,51 @@ model Product {
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 
+  business          Business        @relation(fields: [businessId], references: [id])
   stockMovements    StockMovement[]
   challanItems      ChallanItem[]
+
+  // SKU unique per business (not globally)
+  @@unique([businessId, sku])
+  @@index([businessId])
+  @@index([businessId, sku])
+  @@index([businessId, createdAt])
 }
+
+// ─── StockMovement ──────────────────────────────────────────────────────────
 
 model StockMovement {
   id            String             @id @default(uuid())
+  businessId    String
   productId     String
   quantity      Int
   movementType  StockMovementType
+  previousStock Int                @default(0)
+  newStock      Int                @default(0)
+  referenceType ReferenceType      @default(MANUAL)
+  referenceId   String?
   reason        String
   createdById   String
   createdAt     DateTime           @default(now())
 
+  business      Business           @relation(fields: [businessId], references: [id])
   product       Product            @relation(fields: [productId], references: [id])
   createdBy     User               @relation(fields: [createdById], references: [id])
+
+  @@index([businessId])
+  @@index([businessId, productId])
+  @@index([businessId, createdAt])
+  @@index([productId])
+  @@index([createdAt])
+  @@index([movementType])
+  @@index([referenceId])
 }
+
+// ─── Challan ────────────────────────────────────────────────────────────────
 
 model Challan {
   id             String          @id @default(uuid())
+  businessId     String
   challanNumber  String          @unique
   customerId     String
   totalQuantity  Int             @default(0)
@@ -110,10 +235,21 @@ model Challan {
   createdAt      DateTime        @default(now())
   updatedAt      DateTime        @updatedAt
 
+  business       Business        @relation(fields: [businessId], references: [id])
   customer       Customer        @relation(fields: [customerId], references: [id])
   createdBy      User            @relation(fields: [createdById], references: [id])
   items          ChallanItem[]
+
+  @@index([businessId])
+  @@index([businessId, status])
+  @@index([businessId, createdAt])
+  @@index([status])
+  @@index([customerId])
+  @@index([createdAt])
+  @@index([challanNumber])
 }
+
+// ─── ChallanItem ────────────────────────────────────────────────────────────
 
 model ChallanItem {
   id             String   @id @default(uuid())
@@ -123,9 +259,63 @@ model ChallanItem {
   productName    String
   sku            String
   unitPrice      Decimal  @db.Decimal(12, 2)
-
   quantity       Int
 
-  challan         Challan  @relation(fields: [challanId], references: [id], onDelete: Cascade)
-  product         Product  @relation(fields: [productId], references: [id])
+  challan        Challan  @relation(fields: [challanId], references: [id], onDelete: Cascade)
+  product        Product  @relation(fields: [productId], references: [id])
+}
+
+// ─── FollowUp ───────────────────────────────────────────────────────────────
+
+enum FollowUpStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+model FollowUp {
+  id            String           @id @default(uuid())
+  businessId    String
+  customerId    String
+  title         String
+  notes         String?
+  followUpDate  DateTime
+  assignedTo    String?
+  status        FollowUpStatus   @default(PENDING)
+  createdBy     String
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  business      Business         @relation(fields: [businessId], references: [id])
+  customer      Customer         @relation(fields: [customerId], references: [id])
+  assignedToUser User?           @relation("FollowUpAssigned", fields: [assignedTo], references: [id])
+  createdByUser User            @relation("FollowUpCreated", fields: [createdBy], references: [id])
+
+  @@index([businessId])
+  @@index([customerId])
+  @@index([status])
+  @@index([followUpDate])
+  @@index([createdAt])
+}
+
+// ─── AuditLog ───────────────────────────────────────────────────────────────
+
+model AuditLog {
+  id          String      @id @default(uuid())
+  businessId  String?     // null for platform-level actions
+  userId      String?
+  action      AuditAction
+  entityType  String?
+  entityId    String?
+  metadata    Json?
+  ipAddress   String?
+  createdAt   DateTime    @default(now())
+
+  business    Business?   @relation(fields: [businessId], references: [id])
+  user        User?       @relation(fields: [userId], references: [id])
+
+  @@index([businessId])
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
 }

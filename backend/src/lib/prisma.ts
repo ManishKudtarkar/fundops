@@ -11,10 +11,12 @@ if (!connectionString) {
 
 const adapter = new PrismaPg({
   connectionString,
+  schema: "public",
 });
 
 const prisma = new PrismaClient({
   adapter,
+  errorFormat: "pretty",
 });
 
 export default prisma;

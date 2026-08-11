@@ -1,0 +1,1268 @@
+Server running on http://localhost:5000
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+(node:21560) Warning: SECURITY WARNING: The SSL modes 'prefer', 'require', and 'verify-ca' are treated as aliases for 'verify-full'.
+In the next major version (pg-connection-string v3.0.0 and pg v9.0.0), these modes will adopt standard libpq semantics, which have weaker security guarantees.
+
+To prepare for this change:
+- If you want the current behavior, explicitly use 'sslmode=verify-full'
+- If you want libpq compatibility now, use 'uselibpqcompat=true&sslmode=require'
+
+See https://www.postgresql.org/docs/current/libpq-ssl.html for libpq SSL mode definitions.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:154:35
+
+  151     take: 10,
+  152 }),
+  153 // Upcoming follow-ups (next 7 days)
+→ 154 prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 2)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.count()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:76:35
+
+  73         createdByUser: { select: { id: true, name: true, email: true } },
+  74     },
+  75 }),
+→ 76 prisma_1.default.followUp.count(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 1)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:45339)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:123:35
+
+  120 tomorrow.setDate(tomorrow.getDate() + 1);
+  121 const [todayFollowUps, overdueFollowUps, upcomingFollowUps] = await Promise.all([
+  122     // Today's follow-ups
+→ 123     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.count()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:76:35
+
+  73         createdByUser: { select: { id: true, name: true, email: true } },
+  74     },
+  75 }),
+→ 76 prisma_1.default.followUp.count(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 1)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:45339)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:123:35
+
+  120 tomorrow.setDate(tomorrow.getDate() + 1);
+  121 const [todayFollowUps, overdueFollowUps, upcomingFollowUps] = await Promise.all([
+  122     // Today's follow-ups
+→ 123     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.count()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:76:35
+
+  73         createdByUser: { select: { id: true, name: true, email: true } },
+  74     },
+  75 }),
+→ 76 prisma_1.default.followUp.count(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 1)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:45339)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/customers
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/employees
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: { userRole: 'BUSINESS_ADMIN', allowedRoles: [ 'BUSINESS_ADMIN' ] }
+✅ Authorization passed
+
+📍 GET /api/dashboard
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+
+📍 GET /api/dashboard
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+
+📍 GET /api/products
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/inventory/movements
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/products
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/inventory/movements
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:65:35
+
+  62     }
+  63 }
+  64 const [followUps, total] = await Promise.all([
+→ 65     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:123:35
+
+  120 tomorrow.setDate(tomorrow.getDate() + 1);
+  121 const [todayFollowUps, overdueFollowUps, upcomingFollowUps] = await Promise.all([
+  122     // Today's follow-ups
+→ 123     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:138:35
+
+  135     },
+  136 }),
+  137 // Overdue follow-ups
+→ 138 prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 1)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:65:35
+
+  62     }
+  63 }
+  64 const [followUps, total] = await Promise.all([
+→ 65     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.count()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:76:35
+
+  73         createdByUser: { select: { id: true, name: true, email: true } },
+  74     },
+  75 }),
+→ 76 prisma_1.default.followUp.count(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 1)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:45339)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:123:35
+
+  120 tomorrow.setDate(tomorrow.getDate() + 1);
+  121 const [todayFollowUps, overdueFollowUps, upcomingFollowUps] = await Promise.all([
+  122     // Today's follow-ups
+→ 123     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:65:35
+
+  62     }
+  63 }
+  64 const [followUps, total] = await Promise.all([
+→ 65     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/customers
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/employees
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: { userRole: 'BUSINESS_ADMIN', allowedRoles: [ 'BUSINESS_ADMIN' ] }
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:154:35
+
+  151     take: 10,
+  152 }),
+  153 // Upcoming follow-ups (next 7 days)
+→ 154 prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 2)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 POST /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.create()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:21:38
+
+  18 if (!customer) {
+  19     throw new Error("Customer not found");
+  20 }
+→ 21 return prisma_1.default.followUp.create(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async create (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:22:26) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PgTransaction.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PgTransaction.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PgTransaction.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:45339)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46371)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/customers
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/products
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 GET /api/challans
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES', 'WAREHOUSE', 'ACCOUNTS' ]
+}
+✅ Authorization passed
+
+📍 POST /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '45fa229d-e707-46ca-a513-2dd84c9f5aa4',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+Error: Customer not found
+    at createFollowUp (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:19:15)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async create (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:22:26)
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:65:35
+
+  62     }
+  63 }
+  64 const [followUps, total] = await Promise.all([
+→ 65     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:138:35
+
+  135     },
+  136 }),
+  137 // Overdue follow-ups
+→ 138 prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 1)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/followups/dashboard/summary
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SALES' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:123:35
+
+  120 tomorrow.setDate(tomorrow.getDate() + 1);
+  121 const [todayFollowUps, overdueFollowUps, upcomingFollowUps] = await Promise.all([
+  122     // Today's follow-ups
+→ 123     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getDashboardFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:121:67)
+    at async getDashboard (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:140:22) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+PrismaClientKnownRequestError: 
+Invalid `prisma_1.default.followUp.findMany()` invocation in
+c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:65:35
+
+  62     }
+  63 }
+  64 const [followUps, total] = await Promise.all([
+→ 65     prisma_1.default.followUp.findMany(
+The table `public.FollowUp` does not exist in the current database.
+    at Jr.handleRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:8286)
+    at Jr.handleAndLogRequestError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7581)
+    at Jr.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:65:7288)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async a (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:99:6862)
+    at async Promise.all (index 0)
+    at async getFollowUps (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\services\followup.service.js:64:32)
+    at async list (c:\Users\Manish Kudtarkar\fundops-erp\backend\src\controllers\followup.controller.js:49:24) {
+  code: 'P2021',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: DriverAdapterError: TableDoesNotExist
+        at PrismaPgAdapter.onError (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:675:11)
+        at PrismaPgAdapter.performIO (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:670:12)
+        at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+        at async PrismaPgAdapter.queryRaw (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\adapter-pg\dist\index.js:604:30)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44895)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:44018)
+        at async e.interpretNode (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:46559)
+        at async e.run (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:11:43609)
+        at async e.execute (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:57:815)
+        at async Ut.request (c:\Users\Manish Kudtarkar\fundops-erp\backend\node_modules\@prisma\client\runtime\client.js:58:2421) {
+      cause: [Object]
+    }
+  },
+  clientVersion: '7.9.1'
+}
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed
+
+📍 GET /api/audit/business
+🔐 Authenticate middleware - Auth header: present
+✅ Token decoded: {
+  userId: '30e32243-e8eb-4e0d-afcc-fe565ff8c3ed',
+  role: 'BUSINESS_ADMIN'
+}
+🔐 Authorization check: {
+  userRole: 'BUSINESS_ADMIN',
+  allowedRoles: [ 'BUSINESS_ADMIN', 'SUPER_ADMIN' ]
+}
+✅ Authorization passed

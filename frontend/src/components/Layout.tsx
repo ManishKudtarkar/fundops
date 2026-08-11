@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
   Users,
@@ -8,59 +9,169 @@ import {
   LogOut,
   Search,
   Bell,
+  Menu,
+  X,
+  Moon,
+  Sun,
 } from "lucide-react";
 
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import {
+  getStoredUser,
+  getBusinessName,
+  isSuperAdmin,
+  isBusinessAdmin,
+  logout as logoutUser,
+} from "../services/auth.service";
 
 function Layout() {
   const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+  const user = getStoredUser();
+  const businessName = getBusinessName();
+  const superAdmin = isSuperAdmin();
+  const businessAdmin = isBusinessAdmin();
+
+  useEffect(() => {
+    const storedTheme = window.localStorage.getItem("fundops-theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const shouldUseDark = storedTheme ? storedTheme === "dark" : prefersDark;
+
+    setDarkMode(shouldUseDark);
+    document.documentElement.setAttribute("data-theme", shouldUseDark ? "dark" : "light");
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "light");
+    window.localStorage.setItem("fundops-theme", darkMode ? "dark" : "light");
+  }, [darkMode]);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("user");
-
+    logoutUser();
     navigate("/login");
   };
 
-  const navItems = [
-    {
-      name: "Dashboard",
-      path: "/",
-      icon: LayoutDashboard,
-    },
-    {
-      name: "Customers",
-      path: "/customers",
-      icon: Users,
-    },
-    {
-      name: "Products",
-      path: "/products",
-      icon: Package,
-    },
-    {
-      name: "Inventory",
-      path: "/inventory",
-      icon: Boxes,
-    },
-    {
-      name: "Sales Challans",
-      path: "/challans",
-      icon: FileText,
-    },
-  ];
+  // Get role display name
+  const getRoleDisplay = () => {
+    if (superAdmin) return "Platform Admin";
+    if (businessAdmin) return "Business Admin";
+    if (user?.role === "SALES") return "Sales";
+    if (user?.role === "WAREHOUSE") return "Warehouse";
+    if (user?.role === "ACCOUNTS") return "Accounts";
+    return user?.role || "User";
+  };
+
+  // Get user avatar initials
+  const getInitials = () => {
+    if (!user) return "?";
+    const names = user.name.split(" ");
+    return (
+      (names[0]?.[0] || "") + (names[1]?.[0] || "")
+    ).toUpperCase();
+  };
+
+  // Filter navigation based on role
+  const getNavItems = () => {
+    const baseItems = [
+      {
+        name: "Dashboard",
+        path: "/",
+        icon: LayoutDashboard,
+        roles: ["SUPER_ADMIN", "BUSINESS_ADMIN", "SALES", "WAREHOUSE", "ACCOUNTS"],
+      },
+    ];
+
+    if (superAdmin) {
+      return [
+        ...baseItems,
+        {
+          name: "Businesses",
+          path: "/businesses",
+          icon: Users,
+          roles: ["SUPER_ADMIN"],
+        },
+        {
+          name: "Platform Dashboard",
+          path: "/platform-dashboard",
+          icon: LayoutDashboard,
+          roles: ["SUPER_ADMIN"],
+        },
+      ];
+    }
+
+    // Business-scoped navigation
+    const businessItems = [
+      {
+        name: "Customers",
+        path: "/customers",
+        icon: Users,
+        roles: ["BUSINESS_ADMIN", "SALES", "ACCOUNTS"],
+      },
+      {
+        name: "Products",
+        path: "/products",
+        icon: Package,
+        roles: ["BUSINESS_ADMIN", "SALES", "WAREHOUSE"],
+      },
+      {
+        name: "Inventory",
+        path: "/inventory",
+        icon: Boxes,
+        roles: ["BUSINESS_ADMIN", "WAREHOUSE"],
+      },
+      {
+        name: "Sales Challans",
+        path: "/challans",
+        icon: FileText,
+        roles: ["BUSINESS_ADMIN", "SALES", "ACCOUNTS"],
+      },
+    ];
+
+    if (businessAdmin) {
+      businessItems.push({
+        name: "Employees",
+        path: "/employees",
+        icon: Users,
+        roles: ["BUSINESS_ADMIN"],
+      });
+      businessItems.push({
+        name: "Follow-ups",
+        path: "/followups",
+        icon: FileText,
+        roles: ["BUSINESS_ADMIN", "SALES"],
+      });
+      businessItems.push({
+        name: "Audit Logs",
+        path: "/audit",
+        icon: FileText,
+        roles: ["BUSINESS_ADMIN"],
+      });
+    }
+
+    return [...baseItems, ...businessItems];
+  };
+
+  const navItems = getNavItems();
 
   return (
     <div className="app-layout">
-      {/* SIDEBAR */}
-      <aside className="sidebar">
+      {mobileMenuOpen && (
+        <button
+          type="button"
+          className="mobile-sidebar-overlay"
+          onClick={() => setMobileMenuOpen(false)}
+          aria-label="Close menu"
+        />
+      )}
+
+      <aside className={`sidebar ${mobileMenuOpen ? "mobile-open" : ""}`}>
         <div className="sidebar-logo">
           <div className="logo-box">F</div>
 
           <div>
             <h2>FundOps</h2>
-            <span>ERP Portal</span>
+            <span>{superAdmin ? "Platform" : "ERP Portal"}</span>
           </div>
         </div>
 
@@ -75,6 +186,7 @@ function Layout() {
                 <NavLink
                   key={item.path}
                   to={item.path}
+                  onClick={() => setMobileMenuOpen(false)}
                   className={({ isActive }) =>
                     `nav-item ${isActive ? "active" : ""}`
                   }
@@ -89,53 +201,67 @@ function Layout() {
         </div>
 
         <div className="sidebar-bottom">
-          <button className="nav-item">
-            <Settings size={20} />
-            <span>Settings</span>
-          </button>
+          {!superAdmin && (
+            <button className="nav-item" type="button">
+              <Settings size={20} />
+              <span>Settings</span>
+            </button>
+          )}
 
-          <button
-            className="logout-button"
-            onClick={handleLogout}
-          >
+          <button className="logout-button" type="button" onClick={handleLogout}>
             <LogOut size={20} />
             <span>Logout</span>
           </button>
         </div>
       </aside>
 
-      {/* MAIN AREA */}
       <main className="main-area">
-        {/* HEADER */}
         <header className="header">
-          <div className="header-search">
-            <Search size={19} />
+          <div className="header-left">
+            <button
+              type="button"
+              className="mobile-menu-toggle"
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
 
-            <input
-              type="text"
-              placeholder="Search customers, products..."
-            />
+            <div className="header-search">
+              <Search size={19} />
+              <input type="text" placeholder="Search customers, products..." />
+            </div>
           </div>
 
           <div className="header-right">
-            <button className="notification-button">
+            <button
+              type="button"
+              className="icon-button header-icon-button"
+              onClick={() => setDarkMode((value) => !value)}
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+
+            <button className="notification-button" type="button">
               <Bell size={21} />
 
               <span className="notification-dot" />
             </button>
 
             <div className="user-profile">
-              <div className="avatar">SA</div>
+              <div className="avatar">{getInitials()}</div>
 
               <div>
-                <strong>System Administrator</strong>
-                <span>ADMIN</span>
+                <strong>
+                  {businessName || "Platform"} {superAdmin ? "" : ""}
+                </strong>
+                <span>{getRoleDisplay()}</span>
               </div>
             </div>
           </div>
         </header>
 
-        {/* PAGE CONTENT */}
         <section className="content">
           <Outlet />
         </section>

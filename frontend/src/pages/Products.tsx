@@ -25,6 +25,12 @@ export default function Products() {
   }
   useEffect(() => { const t=window.setTimeout(load,200); return()=>window.clearTimeout(t); }, [search,category,lowStock]);
 
+  useEffect(() => {
+    const handler = () => { load(); };
+    window.addEventListener('fundops:data-changed', handler);
+    return () => window.removeEventListener('fundops:data-changed', handler);
+  }, []);
+
   function openCreate(){setEditing(null);setForm(initial);setModal(true);}
   function openEdit(p:Product){setEditing(p);setForm({...p});setModal(true);}
 
@@ -43,15 +49,29 @@ export default function Products() {
   }
 
   return <>
-    <div className="page-heading"><div><h1>Products</h1><p>Manage your product catalog and pricing.</p></div><button className="primary-button" onClick={openCreate}><Plus size={16}/> Add Product</button></div>
-    {error&&<div className="alert error">{error}</div>}
-    <div className="filter-card">
-      <div className="search-field"><Search size={18}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search product name or SKU..."/></div>
-      <input value={category} onChange={e=>setCategory(e.target.value)} placeholder="Category"/>
-      <label className="check"><input type="checkbox" checked={lowStock} onChange={e=>setLowStock(e.target.checked)}/> Low stock only</label>
-      <button className="secondary-button" onClick={load}><RefreshCw size={15}/> Refresh</button>
-    </div>
-    <section className="dashboard-card page-card">
+    <div className="products-page">
+      <div className="products-header">
+        <div className="products-header-content">
+          <div>
+            <h1>Products</h1>
+            <p>Manage your product catalog and pricing.</p>
+          </div>
+        </div>
+        <div>
+          <button className="primary-button" onClick={openCreate}><Plus size={16}/> Add Product</button>
+        </div>
+      </div>
+
+      {error&&<div className="alert error">{error}</div>}
+
+      <div className="products-filters">
+        <div className="products-search search-field"><Search size={18}/><input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search product name or SKU..."/></div>
+        <div className="products-category"><input value={category} onChange={e=>setCategory(e.target.value)} placeholder="All Categories"/></div>
+        <label className="products-low-stock"><input type="checkbox" checked={lowStock} onChange={e=>setLowStock(e.target.checked)}/> <span>Low stock only</span></label>
+        <div className="products-refresh"><button className="secondary-button" onClick={load}><RefreshCw size={15}/> Refresh</button></div>
+      </div>
+
+      <section className="product-catalog dashboard-card page-card">
       <div className="card-header"><div><h2>Product Catalog</h2><p>{products.length} products</p></div></div>
       <div className="table-wrapper">
         <table><thead><tr><th>Product</th><th>SKU</th><th>Category</th><th>Price</th><th>Stock</th><th>Minimum</th><th>Location</th><th>Actions</th></tr></thead>
@@ -71,6 +91,7 @@ export default function Products() {
         <div className="modal-actions"><button type="button" className="secondary-button" onClick={()=>setModal(false)}>Cancel</button><button className="primary-button">{editing?"Save Changes":"Create Product"}</button></div>
       </form>
     </Modal>}
+    </div>
   </>;
 }
 function Field({label,children,wide}:{label:string;children:React.ReactNode;wide?:boolean}){return <label className={`form-group ${wide?"wide":""}`}><span>{label}</span>{children}</label>}

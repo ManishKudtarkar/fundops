@@ -15,7 +15,7 @@ export async function getChallans(params?: {
 }
 
 export async function getChallan(id: string) {
-  const { data } = await api.get(`/challans/${id}`);
+  const { data } = await api.get(`/challans/${encodeURIComponent(id)}`);
   return data.data as Challan;
 }
 
@@ -28,11 +28,16 @@ export async function createChallan(payload: {
 }
 
 export async function confirmChallan(id: string) {
-  const { data } = await api.post(`/challans/${id}/confirm`);
+  const { data } = await api.post(`/challans/${encodeURIComponent(id)}/confirm`);
   return data.data as Challan;
 }
 
 export async function cancelChallan(id: string) {
-  const { data } = await api.post(`/challans/${id}/cancel`);
+  const { data } = await api.post(`/challans/${encodeURIComponent(id)}/cancel`);
+  return data.data as Challan;
+}
+
+export async function deleteChallan(id: string) {
+  const { data } = await api.delete(`/challans/${encodeURIComponent(id)}`);
   return data.data as Challan;
 }

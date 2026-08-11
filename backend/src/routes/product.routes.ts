@@ -22,14 +22,14 @@ router.use(authenticate);
 
 router.post(
   "/",
-  authorize("ADMIN", "WAREHOUSE"),
+  authorize("BUSINESS_ADMIN", "WAREHOUSE"),
   create
 );
 
 router.get(
   "/",
   authorize(
-    "ADMIN",
+    "BUSINESS_ADMIN",
     "SALES",
     "WAREHOUSE",
     "ACCOUNTS"
@@ -40,7 +40,7 @@ router.get(
 router.get(
   "/:id",
   authorize(
-    "ADMIN",
+    "BUSINESS_ADMIN",
     "SALES",
     "WAREHOUSE",
     "ACCOUNTS"
@@ -50,13 +50,13 @@ router.get(
 
 router.put(
   "/:id",
-  authorize("ADMIN", "WAREHOUSE"),
+  authorize("BUSINESS_ADMIN", "WAREHOUSE"),
   update
 );
 
 router.post(
   "/:id/stock",
-  authorize("ADMIN", "WAREHOUSE"),
+  authorize("BUSINESS_ADMIN", "WAREHOUSE"),
   stockMovement
 );
 

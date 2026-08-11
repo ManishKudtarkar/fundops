@@ -39,7 +39,7 @@ export async function createStockMovement(
   id: string,
   payload: {
     quantity: number;
-    movementType: "IN" | "OUT";
+    movementType: "IN" | "OUT" | "ADJUSTMENT";
     reason: string;
   }
 ) {

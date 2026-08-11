@@ -14,6 +14,7 @@ import {
   getById,
   update,
   followUp,
+  remove,
 } from "../controllers/customer.controller";
 
 const router = Router();
@@ -22,14 +23,14 @@ router.use(authenticate);
 
 router.post(
   "/",
-  authorize("ADMIN", "SALES"),
+  authorize("BUSINESS_ADMIN", "SALES"),
   create
 );
 
 router.get(
   "/",
   authorize(
-    "ADMIN",
+    "BUSINESS_ADMIN",
     "SALES",
     "WAREHOUSE",
     "ACCOUNTS"
@@ -40,7 +41,7 @@ router.get(
 router.get(
   "/:id",
   authorize(
-    "ADMIN",
+    "BUSINESS_ADMIN",
     "SALES",
     "WAREHOUSE",
     "ACCOUNTS"
@@ -50,14 +51,20 @@ router.get(
 
 router.put(
   "/:id",
-  authorize("ADMIN", "SALES"),
+  authorize("BUSINESS_ADMIN", "SALES"),
   update
 );
 
 router.post(
   "/:id/follow-up",
-  authorize("ADMIN", "SALES"),
+  authorize("BUSINESS_ADMIN", "SALES"),
   followUp
+);
+
+router.delete(
+  "/:id",
+  authorize("BUSINESS_ADMIN", "SALES"),
+  remove
 );
 
 export default router;
